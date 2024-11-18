@@ -1,0 +1,26 @@
+class Solution {
+    public int[] decrypt(int[] cd, int k) {
+        int n = cd.length;
+        int[] res = new int[n];
+        
+        if (k == 0) {
+            return res;
+        }
+        
+        for (int i = 0; i < n; i++) {
+            int sum = 0;
+            if (k > 0) {
+                for (int j = 1; j <= k; j++) {
+                    sum += cd[(i + j) % n];
+                }
+            } else {
+                for (int j = 1; j <= -k; j++) {
+                    sum += cd[(i - j + n) % n];
+                }
+            }
+            res[i] = sum;
+        }
+        
+        return res;
+    }
+}
