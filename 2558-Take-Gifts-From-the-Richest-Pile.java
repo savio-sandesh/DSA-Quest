@@ -1,20 +1,27 @@
 class Solution {
-    public long pickGifts(int[] g, int k) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
-        for (int gift:g) {
-            pq.add(gift);
-        }
+
+    public long pickGifts(int[] gifts, int k) {
         
-        for (int i=0; i<k; i++) {
-            int max = pq.poll();
-            int rem = (int) Math.floor(Math.sqrt(max));
-            pq.add(rem);
+        List<Integer> giftsList = new ArrayList<>();
+        for (int gift : gifts) {
+            giftsList.add(-gift);
         }
-        
-        long total=0;
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(giftsList);
+        while(k-- > 0) {
+            
+            int maxElement = -pq.poll();
+
+            
+            pq.offer(-(int) Math.sqrt(maxElement));
+        }
+
+        // Accumulate the sum of the elements in the heap
+        long numberOfRemainingGifts = 0;
         while (!pq.isEmpty()) {
-            total += pq.poll();
+            numberOfRemainingGifts -= pq.poll(); //since it's negative, it will become positive with -ve sign
         }
-        return total;
+
+        return numberOfRemainingGifts;
     }
 }
