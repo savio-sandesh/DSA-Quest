@@ -3,7 +3,7 @@ class Solution {
         int n= temperatures.length;
         Stack<Integer> st = new Stack<>();
         int[] ans=new int[n];
-        for(int i =0;i<n;i++){
+        for(int i=0;i<n;i++){
             // int count=0;
             // for(int j =i+1;j<n;j++){
             //     if(temperatures[j]>temperatures[i]){
